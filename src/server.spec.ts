@@ -164,7 +164,7 @@ describe('api gateway sever', function () {
         'queryParameters': { foo: 'bar' },
         'pathParameters': {},
         'body': 'bar',
-        'isBase64Encoded':  false
+        'isBase64Encoded': false
     };
 
     it('should pass without error', function (done) {
@@ -188,7 +188,7 @@ describe('api gateway sever', function () {
 
     it('should returns 404', function (done) {
         const app = express();
-        fcApiGatewayFunction(app).handler(JSON.stringify({...event, path: '/not-found'}), {}, (err, data) => {
+        fcApiGatewayFunction(app).handler(JSON.stringify({ ...event, path: '/not-found' }), {}, (err, data) => {
             expect(data.statusCode).equal(404);
             done();
         });
@@ -201,7 +201,7 @@ describe('api gateway sever', function () {
             done();
         });
 
-        fcApiGatewayFunction(app).handler(JSON.stringify({...event, isBase64Encoded: true, body: Buffer.from('bar').toString('base64') }), {}, (err, data) => {
+        fcApiGatewayFunction(app).handler(JSON.stringify({ ...event, isBase64Encoded: true, body: Buffer.from('bar').toString('base64') }), {}, (err, data) => {
         });
     });
 
