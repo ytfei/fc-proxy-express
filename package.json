@@ -6,7 +6,10 @@
   "typings": "lib/index.d.ts",
   "dependencies": {
     "binary-case": "^1.1.4",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0",
     "type-is": "^1.6.18",
+    "typedoc": "^0.16.7",
     "url": "^0.11.0"
   },
   "publishConfig": {
@@ -28,14 +31,15 @@
   "scripts": {
     "prepare": "npm run clean && npm run build",
     "clean": "rimraf lib && rimraf docs/api && rimraf .nyc_output && rimraf coverage",
-    "build": "concurrently -n compile,lint -c blue,green \"tsc -p compile.tsconfig.json\" \"tslint -c ../../configs/build.tslint.json --project compile.tsconfig.json\"",
+    "build": "concurrently -n compile,lint -c blue,green \"tsc -p compile.tsconfig.json\" \"tslint -c ./configs/build.tslint.json --project compile.tsconfig.json\"",
     "watch": "tsc -w -p compile.tsconfig.json",
-    "test": "nyc mocha --opts ../../configs/mocha.opts \"./lib/**/*.*spec.js\"",
-    "docs": "typedoc --tsconfig ../../configs/typedoc-tsconfig.json --options ../../configs/typedoc.json src"
+    "test": "nyc mocha --opts ./configs/mocha.opts \"./lib/**/*.*spec.js\"",
+    "docs": "typedoc --tsconfig ./configs/typedoc-tsconfig.json --options ./configs/typedoc.json src"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
     "@types/type-is": "^1.6.2",
+    "concurrently": "^5.0.2",
     "express": "^4.17.0",
     "rimraf": "^3.0.0"
   },
