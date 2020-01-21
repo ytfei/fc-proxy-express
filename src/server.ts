@@ -5,6 +5,7 @@ import { HttpTriggerProxy } from './http-trigger-proxy';
 
 export class Server {
     socketPathSuffix: string;
+    socketPort: number;
     binaryTypes: string[];
     isListening: boolean = false;
     rawServer: http.Server;
@@ -19,6 +20,7 @@ export class Server {
         this.rawServer.setTimeout(600 * 1000);
 
         this.socketPathSuffix = this.getRandomString();
+        this.socketPort = this.getRandomPort();
         this.binaryTypes = binaryTypes ? binaryTypes.slice() : [];
         this.rawServer.on('listening', () => {
             this.isListening = true;
@@ -54,11 +56,19 @@ export class Server {
     }
 
     startServer () {
-        return this.rawServer.listen(this.getSocketPath());
+        return this.rawServer.listen(this.getListenPort());
     }
 
     protected getRandomString() {
-        return Math.random().toString(36).substring(2, 15);
+        return Math.random().toString(36).substring(2, 5);
+    }
+
+    protected getRandomPort() {
+        return 4321;
+    }
+
+    getListenPort() {
+        return this.socketPort;
     }
 
     getSocketPath() {
@@ -67,7 +77,7 @@ export class Server {
             const path = require('path');
             return path.join('\\\\?\\pipe', process.cwd(), `server-${this.socketPathSuffix}`);
         } else {
-            return `/tmp/server-${this.socketPathSuffix}.sock`;
+            return `/tmp/svr-${this.socketPathSuffix}.sock`;
         }
     }
 

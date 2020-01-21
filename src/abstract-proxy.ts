@@ -53,7 +53,9 @@ export abstract class AbstractProxy<T extends Context> implements Proxy<T> {
             method: this.getHttpMethod(ctx),
             path: this.getPath(ctx),
             headers,
-            socketPath: this.server.getSocketPath()
+            host: '127.0.0.1',
+            port: this.server.getListenPort(),
+            // socketPath: this.server.getSocketPath()
             // protocol: `${headers['X-Forwarded-Proto']}:`,
             // host: headers.Host,
             // hostname: headers.Host, // Alias for host
