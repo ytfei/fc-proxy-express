@@ -1,6 +1,6 @@
 {
   "name": "@sj-tech/fc-proxy-express",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "通过代理的方式，将 express 迁移到阿里云函数计算服务中",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
